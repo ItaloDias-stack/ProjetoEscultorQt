@@ -24,6 +24,7 @@ private slots:
 
     void on_opacityValueSlider_valueChanged(int value);
 
+    void generateOff();
 private:
     Ui::MainWindow *ui;
     int r,g,b,a;
