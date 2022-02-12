@@ -5,14 +5,16 @@
 #include <string>
 #include <vector>
 struct  Obj {
-  int r, g, b;
-  int x,y;
+  int r, g, b,a;
+  int x,y,z;
 };
 class Matrix : public QWidget
 {
     Q_OBJECT
 public:
+    std::vector<Obj> objs;
     int r=0, g=0, b=0;
+    int z=1;
     explicit Matrix(QWidget *parent = nullptr);
     ~Matrix();
     void paintEvent(QPaintEvent *event) override;
@@ -21,13 +23,12 @@ public:
     void mouseReleaseEvent(QMouseEvent * ev)override;
     void draw(int x,int y);
 public slots:
+    void setZValue(int z);
     void setRValue(int r);
     void setGValue(int g);
     void setBValue(int b);
 private:
     std::string estado;
-protected:
-    std::vector<Obj> objs;
 signals:
 
 };

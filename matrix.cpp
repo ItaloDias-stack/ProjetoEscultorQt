@@ -38,12 +38,14 @@ void Matrix::paintEvent(QPaintEvent *event)
         }
     }
     for(int x = 0; x<this->objs.size() ;x++){
-        pen.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
-        brush.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
-        brush.setStyle(Qt::SolidPattern);
-        painter.setPen(pen);
-        painter.setBrush(brush);
-        painter.drawEllipse((float) objs[x].x*10+2.5,(float)objs[x].y*10+2.5,7,7);
+        if(objs[x].z >= this->z){
+            pen.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
+            brush.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
+            brush.setStyle(Qt::SolidPattern);
+            painter.setPen(pen);
+            painter.setBrush(brush);
+            painter.drawEllipse((float) objs[x].x*10+2.5,(float)objs[x].y*10+2.5,7,7);
+        }
         //painter.drawRect(objs[x].x*10,objs[x].y*10,10,10);
     }
 }
@@ -82,7 +84,14 @@ void Matrix::draw(int x, int y)
     o.r = this->r;
     o.x = x/10;
     o.y = y/10;
+    o.z = this->z;
     this->objs.push_back(o);
+    repaint();
+}
+
+void Matrix::setZValue(int z)
+{
+    this->z=z;
     repaint();
 }
 

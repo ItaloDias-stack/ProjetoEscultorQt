@@ -25,10 +25,11 @@ private slots:
     void on_opacityValueSlider_valueChanged(int value);
 
     void generateOff();
+    void on_horizontalSlider_valueChanged(int value);
+
 private:
     Ui::MainWindow *ui;
     int r,g,b,a;
-    Sculptor *s;
     int dimX,dimY,dimZ;
 };
 #endif // MAINWINDOW_H
