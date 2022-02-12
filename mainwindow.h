@@ -30,6 +30,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     int r,g,b,a;
+    Sculptor *s;
     int dimX,dimY,dimZ;
 };
 #endif // MAINWINDOW_H
