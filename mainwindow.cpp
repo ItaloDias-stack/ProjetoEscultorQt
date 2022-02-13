@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-
+#include <windows.h>
+#include <ShellAPI.h>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -46,15 +47,18 @@ void MainWindow::on_opacityValueSlider_valueChanged(int value)
 
 void MainWindow::generateOff()
 {
-    this->s =new Sculptor(100,100,100);
-    for(int i = 0; i < this->ui->widget->objs.size();i++){
-        int x = this->ui->widget->objs[i].x==0 ? 1 : this->ui->widget->objs[i].x;
-        int y = this->ui->widget->objs[i].y==0 ? 1 : this->ui->widget->objs[i].y;
-        int z = this->ui->widget->objs[i].z==0 ? 1 : this->ui->widget->objs[i].z;
-        s->setColor(this->ui->widget->objs[i].r/255,this->ui->widget->objs[i].g/255,this->ui->widget->objs[i].b/255,this->ui->widget->objs[i].a/100);
-        s->putVoxel(x,y,z);
+    if(this->ui->widget->objs.size()>0){
+        this->s =new Sculptor(100,100,100);
+        for(int i = 0; i < this->ui->widget->objs.size();i++){
+            int x = this->ui->widget->objs[i].x==0 ? 1 : this->ui->widget->objs[i].x;
+            int y = this->ui->widget->objs[i].y==0 ? 1 : this->ui->widget->objs[i].y;
+            int z = this->ui->widget->objs[i].z==0 ? 1 : this->ui->widget->objs[i].z;
+            s->setColor(this->ui->widget->objs[i].r/255,this->ui->widget->objs[i].g/255,this->ui->widget->objs[i].b/255,this->ui->widget->objs[i].a/100);
+            s->putVoxel(x,y,z);
+        }
+        s->writeOFF("escultura.off");
+        ShellExecute(0,0,L"C:\\Users\\Italo Dias\\Documents\\NetBeansProjects\\CProjects\\build-ProjetoEscultorQt-Desktop_Qt_5_12_12_MinGW_64_bit-Debug\\escultura.off",0,0,SW_RESTORE);
     }
-    s->writeOFF("escultura.off");
 }
 
 

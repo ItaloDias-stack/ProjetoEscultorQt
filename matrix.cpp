@@ -38,7 +38,7 @@ void Matrix::paintEvent(QPaintEvent *event)
         }
     }
     for(int x = 0; x<this->objs.size() ;x++){
-        if(objs[x].z >= this->z){
+        if(objs[x].z == this->z){
             pen.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
             brush.setColor(QColor(objs[x].r,objs[x].g,objs[x].b));
             brush.setStyle(Qt::SolidPattern);
